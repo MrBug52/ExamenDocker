@@ -1,0 +1,18 @@
+1 - Crear Xarxa:
+docker network create XarxaExamen
+
+2 - Crear volums: 
+docker volume create Tomcat
+docker volume create nginX
+
+3 - Iniciar contenedor Tomcat
+docker run -d --name aplicacionjava --network XarxaExamen -v Tomcat:/usr/local/tomcat/webapps -p 8080:8080 tomcat:9.0
+
+4 - Copiar sample.war al directori /usr/local/tomcat/webapps/
+docker cp sample.raw aplicacionjava:/usr/local/tomcat/webapps/
+
+5 - Iniciar contenedor Nginx
+docker run -d --name nginx --network XarxaExamen -v nxinX:/etc/nginx/conf.d/ -p 8088:80 nginx
+
+6 - Copiar default.conf a /etc/nginx/conf.d/
+docker cp default.conf nginx:/etc/nginx/conf.d/
